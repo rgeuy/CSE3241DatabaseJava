@@ -2,7 +2,7 @@ public class Artist {
 
 	private String fName, lName, stageName, bDate, gender;
 	
-	public Artist(fName, lName, stageName, bDate, gender) {
+	public Artist(String fName, String lName, String stageName, String bDate, String gender) {
 		this.fName = fName;
 		this.lName = lName;
 		this.stageName = stageName;
