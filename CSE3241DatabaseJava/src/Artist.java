@@ -10,6 +10,10 @@ public class Artist {
 		this.gender = gender;
 	}
 	
+	public String getStageName() {
+		return stageName;
+	}
+	
 	public void updateName(String fName, String lName) {
 		this.fName = fName;
 		this.lName = lName;

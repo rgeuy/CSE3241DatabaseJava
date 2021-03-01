@@ -1,8 +1,14 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 	
 	public static Scanner s;
+	private static HashMap<String, List<Artist>> artistList = new HashMap<>();
+	private static HashMap<String, List<Track>> trackList = new HashMap<>();
+	private static HashMap<String, List<Media>> orderedMedia = new HashMap<>();
 
 	public static void main(String[] args) {
 		s = new Scanner(System.in);
@@ -81,6 +87,16 @@ public class Main {
 		gender = s.nextLine();
 		
 		Artist art = new Artist(fName, lName, stageName, bDate, gender);
+		
+		String artName = art.getStageName();
+		if(artistList.containsKey(artName)) {
+			artistList.get(artName).add(art);
+		}else {
+			ArrayList<Artist> artists = new ArrayList<>();
+			artists.add(art);
+			artistList.put(artName, artists);
+		}
+		
 		System.out.println("Artist added!");
 	}
 	
