@@ -1,24 +1,24 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Main {
-	
+
 	public static Scanner s;
-	private static HashMap<String, List<Artist>> artistList = new HashMap<>();
-	private static HashMap<String, List<Track>> trackList = new HashMap<>();
-	private static HashMap<String, List<Media>> orderedMedia = new HashMap<>();
+	public static ArrayList<Media> allMedias = new ArrayList<Media>();
+	public static ArrayList<Artist> allArtists = new ArrayList<Artist>();
+	public static ArrayList<Track> allTracks = new ArrayList<Track>();
 
 	public static void main(String[] args) {
 		s = new Scanner(System.in);
 		String input;
 		printOptions();
 		input = s.nextLine();
-		
-		while (input != "x") {
+
+		while (!input.equals(("x"))) {
 			int option = Integer.parseInt(input);
-			
+
 			switch (option) {
 			case 1:
 				option1();
@@ -29,7 +29,7 @@ public class Main {
 			case 3:
 				option3();
 				break;
-			case 4: 
+			case 4:
 				option4();
 				break;
 			case 5:
@@ -45,20 +45,17 @@ public class Main {
 				option8();
 				break;
 			default:
-				System.out.println("That is not a selection");
+				System.out.println("That is not a selection.");
 				break;
 			}
-			
+
 			printOptions();
 			input = s.nextLine();
 		}
-		
-		
-		
-		
+
 		s.close();
 	}
-	
+
 	public static void printOptions() {
 		System.out.println("Please select one of the following options:");
 		System.out.println("1) Enter a new artist");
@@ -72,7 +69,9 @@ public class Main {
 		System.out.println("Press x to exit");
 		System.out.print("Your option: ");
 	}
-	
+
+	// Entering data for a new artist (use the data attributes
+	// that you defined for that entity)
 	public static void option1() {
 		String fName, lName, stageName, bDate, gender;
 		System.out.print("Please enter their first name ");
@@ -81,50 +80,211 @@ public class Main {
 		lName = s.nextLine();
 		System.out.print("Please enter their stage name ");
 		stageName = s.nextLine();
-		System.out.print("Please enter their date of birth ");
+		System.out.print("Please enter their date of birth (MM/DD/YYYY) ");
 		bDate = s.nextLine();
 		System.out.print("Please enter their gender (M/F) ");
 		gender = s.nextLine();
-		
-		Artist art = new Artist(fName, lName, stageName, bDate, gender);
-		
-		String artName = art.getStageName();
-		if(artistList.containsKey(artName)) {
-			artistList.get(artName).add(art);
-		}else {
-			ArrayList<Artist> artists = new ArrayList<>();
-			artists.add(art);
-			artistList.put(artName, artists);
-		}
-		
+
+		Artist artist = new Artist(fName, lName, stageName, bDate, gender);
+		allArtists.add(artist);
 		System.out.println("Artist added!");
 	}
-	
+
+	// Entering data for a new track/song (use the data attributes that you
+	// defined for that entity)
 	public static void option2() {
-		
+		String title, length, year, genre, awards;
+		System.out.print("Please enter the title of the track ");
+		title = s.nextLine();
+		System.out.print("Please enter the length of the track as XX:XX ");
+		length = s.nextLine();
+		System.out.print("Please enter the year the track was made ");
+		year = s.nextLine();
+		System.out.print("Please enter the genre of the track ");
+		genre = s.nextLine();
+		System.out.print("Please enter any awards the track received, separated by a comma ");
+		awards = s.nextLine();
+
+		Track track = new Track(title, length, year, genre, awards);
+		allTracks.add(track);
+		System.out.println("Track added!");
 	}
-	
+
+	// Entering data for new media items ordered: type of media (albums,
+	// videos and audiobooks), with number of copies purchase, price and
+	// an estimated date of arrival.
 	public static void option3() {
-		
+		String medType, delvDate;
+		int copies;
+		float price;
+
+		System.out.print("Please enter the type of media type (ALBUM/MOVIE/AUDIOBOOK ");
+		medType = s.nextLine();
+		System.out.print("Please enter the delivery date ");
+		delvDate = s.nextLine();
+		System.out.print("Please enter the number of copies ");
+		copies = Integer.parseInt(s.nextLine()); // assume they enter a number
+		System.out.print("Please enter the price as XX.XX ");
+		price = Float.parseFloat(s.nextLine());
+
+		Media media = new Media(medType, copies, price, delvDate);
+		allMedias.add(media);
+		System.out.println("Media added!");
 	}
-	
+
+	// Retrieve information about one specific artist (provided by the user)
 	public static void option4() {
-		
+		String fName, lName, stageName, bDate, gender;
+		System.out.print("Please enter the artist's first name ");
+		fName = s.nextLine();
+		System.out.print("Please enter the artist's last name ");
+		lName = s.nextLine();
+		System.out.print("Please enter the artist's stage name ");
+		stageName = s.nextLine();
+		System.out.print("Please enter the artist's date of birth (MM/DD/YYYY) ");
+		bDate = s.nextLine();
+		System.out.print("Please enter the artist's gender M/F ");
+		gender = s.nextLine();
+
+		if (allArtists.size() != 0) {
+			for (Artist a : allArtists) {
+				if (stageName.equals(a.getStageName()) && fName.equals(a.getfName()) && lName.equals(a.getlName())
+						&& bDate.equals(a.getbDate()) && gender.equals(a.getGender())) {
+					a.printArtistInfo();
+				} else {
+				}
+			}
+			System.out.println("That info does not match an artist in this database. ");
+		} else {
+			System.out.println("Please enter an artist before querying.");
+		}
+
 	}
-	
+
+	// Retrieve information about a track (provided by the user)
 	public static void option5() {
-		
+		String title, length, year, genre, awards;
+		System.out.print("Please enter the title of the track ");
+		title = s.nextLine();
+		System.out.print("Please enter the length of the track as XX:XX ");
+		length = s.nextLine();
+		System.out.print("Please enter the year the track was made ");
+		year = s.nextLine();
+		System.out.print("Please enter the genre of the track ");
+		genre = s.nextLine();
+		System.out.print("Please enter any awards the track received, separated by a comma ");
+		awards = s.nextLine();
+
+		if (allTracks.size() != 0) {
+			for (Track t : allTracks) {
+				if (title.equals(t.getTitle()) && length.equals(t.getLength()) && year.equals(t.getYear())
+						&& genre.equals(t.getGenre()) && t.getAwards().indexOf(awards) != 0) {
+					t.printTrackInfo();
+				}
+			}
+			System.out.println("That info does not match a track in this database. ");
+		} else {
+			System.out.println("Please enter a track before querying.");
+		}
 	}
-	
+
+	// Retrieve information about the media items that are ordered
+	// by the library (provided by the user)
 	public static void option6() {
-		
+		String medType, delvDate;
+		int copies;
+		float price;
+
+		System.out.print("Please enter the type of media type (ALBUM/MOVIE/AUDIOBOOK ");
+		medType = s.nextLine();
+		System.out.print("Please enter the delivery date ");
+		delvDate = s.nextLine();
+		System.out.print("Please enter the number of copies ");
+		copies = Integer.parseInt(s.nextLine()); // assume they enter a number
+		System.out.print("Please enter the price as XX.XX ");
+		price = Float.parseFloat(s.nextLine());
+
+		if (allMedias.size() != 0) {
+			for (Media m : allMedias) {
+				if (medType.equals(m.getMedType()) && delvDate.equals(m.getDelvDate()) && copies == m.getCopies()
+						&& price == m.getPrice()) {
+					m.printMediaInfo();
+				}
+			}
+			System.out.println("That info does not match a media in this database. ");
+		} else {
+			System.out.println("Please enter a media before querying.");
+		}
 	}
-	
+
+	// Editing existing entries for an artist (artist selected by the user)
 	public static void option7() {
-		
+		String fName, lName, stageName, bDate, gender;
+		System.out.print("Please enter the artist's first name ");
+		fName = s.nextLine();
+		System.out.print("Please enter the artist's last name ");
+		lName = s.nextLine();
+		System.out.print("Please enter the artist's stage name ");
+		stageName = s.nextLine();
+		System.out.print("Please enter the artist's date of birth (MM/DD/YYYY) ");
+		bDate = s.nextLine();
+		System.out.print("Please enter the artist's gender M/F ");
+		gender = s.nextLine();
+
+		if (allArtists.size() != 0) {
+			Iterator<Artist> i = allArtists.iterator();
+			
+			for (Artist a : allArtists) {
+				if (stageName.equals(a.getStageName()) && fName.equals(a.getfName()) && lName.equals(a.getlName())
+						&& bDate.equals(a.getbDate()) && gender.equals(a.getGender())) {
+					
+					System.out.print("Please enter the artist's updated first name ");
+					fName = s.nextLine();
+					System.out.print("Please enter the artist's updated last name ");
+					lName = s.nextLine();
+					a.updateName(fName, lName);
+					System.out.print("Please enter the artist's updated stage name ");
+					a.updateStageName(s.nextLine());
+					System.out.print("Please enter the artist's updated date of birth (MM/DD/YYYY) ");
+					a.updateBirthday(s.nextLine());
+					System.out.print("Please enter the artist's updated gender ");
+					a.updateGender(s.nextLine());
+					System.out.print("Artist updated!");
+					a.printArtistInfo();
+				}
+			}
+			System.out.println("Could not find that artist in this database to update.");
+		} else {
+			System.out.println("Please enter an artist before trying to update");
+		}
 	}
-	
+
+	// Deleting an existing track (track selected by the user)
 	public static void option8() {
+		String title, length, year, genre, awards;
+		System.out.print("Please enter the title of the track ");
+		title = s.nextLine();
+		System.out.print("Please enter the length of the track as XX:XX ");
+		length = s.nextLine();
+		System.out.print("Please enter the year the track was made ");
+		year = s.nextLine();
+		System.out.print("Please enter the genre of the track ");
+		genre = s.nextLine();
+		System.out.print("Please enter any awards the track received, separated by a comma ");
+		awards = s.nextLine();
 		
+		if (allTracks.size() != 0) {
+			Iterator<Track> i = allTracks.iterator();
+			while (i.hasNext()) {
+				Track t = i.next();
+				if (title.equals(t.getTitle()) && length.equals(t.getLength()) && year.equals(t.getYear())
+						&& genre.equals(t.getGenre()) && t.getAwards().indexOf(awards) != 0) {
+					i.remove();
+					System.out.println("Removed track!");
+				}
+			}
+		} else {
+			System.out.println("Please enter a track before attempting to delete it. ");
+		}
 	}
 }

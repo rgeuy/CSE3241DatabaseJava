@@ -12,4 +12,24 @@ public class Track {
 	public void printTrackInfo() {
 		System.out.println("Track Information:\n\nTitle: " + title + "\nLength: " + length + "\nYear: " + year + "\nGenre: " + genre + "\nAwards: " + awards);
 	}
+	
+	public String getTitle() {
+		return title;
+	}
+	
+	public String getLength() {
+		return length;
+	}
+	
+	public String getYear() {
+		return year;
+	}
+	
+	public String getGenre() {
+		return genre;
+	}
+	
+	public String getAwards() {
+		return awards;
+	}
 }

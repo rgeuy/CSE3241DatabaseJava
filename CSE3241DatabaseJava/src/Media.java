@@ -13,4 +13,20 @@ public class Media {
 	public void printMediaInfo() {
 		System.out.println("Ordered Media Information:\n\nMedia Type: " + medType + "\nNumber of copies: " + copies + "\nPrice: " + price + "\nExpected Delivery Date: " + delvDate);
 	}
+	
+	public String getMedType() {
+		return medType;
+	}
+	
+	public String getDelvDate() {
+		return delvDate;
+	}
+	
+	public int getCopies() {
+		return copies;
+	}
+	
+	public float getPrice() {
+		return price;
+	}
 }

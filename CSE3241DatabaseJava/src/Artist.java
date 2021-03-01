@@ -14,6 +14,22 @@ public class Artist {
 		return stageName;
 	}
 	
+	public String getfName() {
+		return fName;
+	}
+	
+	public String getlName() {
+		return lName;
+	}
+	
+	public String getbDate() {
+		return bDate;
+	}
+	
+	public String getGender() {
+		return gender;
+	}
+	
 	public void updateName(String fName, String lName) {
 		this.fName = fName;
 		this.lName = lName;
