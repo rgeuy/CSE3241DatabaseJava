@@ -179,7 +179,7 @@ public class Main {
 			year = s.nextLine();
 			System.out.print("Please enter the genre of the track ");
 			genre = s.nextLine();
-			System.out.print("Please enter any awards the track received, separated by a comma ");
+			System.out.print("Please enter an award the track received ");
 			awards = s.nextLine();
 
 			for (Track t : allTracks) {
