@@ -87,7 +87,7 @@ public class Main {
 
 		Artist artist = new Artist(fName, lName, stageName, bDate, gender);
 		allArtists.add(artist);
-		System.out.println("Artist added!");
+		System.out.println("\nArtist added!\n");
 	}
 
 	// Entering data for a new track/song (use the data attributes that you
@@ -107,7 +107,7 @@ public class Main {
 
 		Track track = new Track(title, length, year, genre, awards);
 		allTracks.add(track);
-		System.out.println("Track added!");
+		System.out.println("\nTrack added!\n");
 	}
 
 	// Entering data for new media items ordered: type of media (albums,
@@ -129,7 +129,7 @@ public class Main {
 
 		Media media = new Media(medType, copies, price, delvDate);
 		allMedias.add(media);
-		System.out.println("Media added!");
+		System.out.println("\nMedia added!\n");
 	}
 
 	// Retrieve information about one specific artist (provided by the user)
@@ -167,7 +167,7 @@ public class Main {
 
 	// Retrieve information about a track (provided by the user)
 	public static void option5() {
-
+		
 		if (allTracks.size() != 0) {
 			String title, length, year, genre, awards;
 			boolean isFound = false;
@@ -184,7 +184,7 @@ public class Main {
 
 			for (Track t : allTracks) {
 				if (title.equals(t.getTitle()) && length.equals(t.getLength()) && year.equals(t.getYear())
-						&& genre.equals(t.getGenre()) && t.getAwards().indexOf(awards) != 0) {
+						&& genre.equals(t.getGenre()) && t.getAwards().indexOf(awards) != -1) {
 					t.printTrackInfo();
 					isFound = true;
 				}
@@ -268,7 +268,7 @@ public class Main {
 					a.updateBirthday(s.nextLine());
 					System.out.print("Please enter the artist's updated gender ");
 					a.updateGender(s.nextLine());
-					System.out.print("Artist updated!");
+					System.out.print("\nArtist updated!\n");
 					a.printArtistInfo();
 				}
 			}
@@ -303,9 +303,9 @@ public class Main {
 			while (i.hasNext()) {
 				Track t = i.next();
 				if (title.equals(t.getTitle()) && length.equals(t.getLength()) && year.equals(t.getYear())
-						&& genre.equals(t.getGenre()) && t.getAwards().indexOf(awards) != 0) {
+						&& genre.equals(t.getGenre()) && t.getAwards().indexOf(awards) != -1) {
 					i.remove();
-					System.out.println("Removed track!");
+					System.out.println("\nRemoved track!\n");
 					isFound = true;
 				}
 			}

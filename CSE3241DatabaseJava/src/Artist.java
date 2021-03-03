@@ -48,6 +48,6 @@ public class Artist {
 	}
 	
 	public void printArtistInfo() {
-		System.out.println("Artist information:\n\nName: " + fName + " " + lName + "\nStage Name: " + stageName + "\nBirthday: " + bDate + "\nGender: " + gender);
+		System.out.println("\nArtist information:\n\nName: " + fName + " " + lName + "\nStage Name: " + stageName + "\nBirthday: " + bDate + "\nGender: " + gender + "\n");
 	}
 }

@@ -10,7 +10,7 @@ public class Track {
 	}
 	
 	public void printTrackInfo() {
-		System.out.println("Track Information:\n\nTitle: " + title + "\nLength: " + length + "\nYear: " + year + "\nGenre: " + genre + "\nAwards: " + awards);
+		System.out.println("\nTrack Information:\n\nTitle: " + title + "\nLength: " + length + "\nYear: " + year + "\nGenre: " + genre + "\nAwards: " + awards + "\n");
 	}
 	
 	public String getTitle() {
